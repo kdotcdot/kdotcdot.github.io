@@ -6,10 +6,8 @@
 <body>
 
 <h1>Meeting Ways!</h1>
+<p id ="dates"></p>
 <p id="meeting"></p>
-<p>
-	Stuff goes here
-</p>
 		
 <script>
 	var countOfWeddings = 0; 
@@ -27,7 +25,7 @@
 	var containsOtherMeetingTypes = ""; 
 	var containsBougeyShit = ""; 
 	var start_date = "20160101"; 
-	var end_date = "20160115"; 
+	var end_date = "20160201"; 
 	
 	var other_meetings = ["mutual friends", "mutual friend", "next door", "apartment building", "co-op building", "at a bar", "blind date"]; 
 	var bougey = ["Northwestern", "Sotheby's", "Georgetown", "University of Cambridge", "Oxford", "Morgan Stanley", "Bank of America", "investment firm", "investment bank", "investment fund", "investment executive", "investment firms", "investment company", "PricewaterhouseCoopers", "Barclays", "venture capital", "Goldman Sachs", "University of Chicago", "Aspen Institute", "Burning Man", "law school", "business school", "banker", "lawyer", "lawyers", "venture capitalist", "law firm"]; 
@@ -329,7 +327,8 @@
 				}
 					
 					document.getElementById("meeting").innerHTML = toDisplay; 
-				
+					document.getElementById("dates").innerHTML = "Dates: " + start_date + " to " + end_date; 
+
 			}).fail(function(err) {
 			  throw err;
 			  console.log("Failed"); 
