@@ -2,11 +2,16 @@
 <html>
 <head>
 	<script src="jquery-3.1.1.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Coiny|Lato|Montserrat|Oswald|Prociono|Raleway|Roboto|Roboto+Condensed|Shrikhand|Slabo+27px|Source+Sans+Pro" rel="stylesheet">
 </head>
 <body>
 
-<h1>2016</h1>
-<p id ="dates-1"></p>
+<h1>The New York Times Wedding Announcements</h1>
+<h2>& the rise of online dating</h2>
+<h3>The context</h3>
+
+<p id ="dates-1">The dates are here: </p>
 <p id="meeting-1"></p>
 
 <!-- 
@@ -19,7 +24,7 @@
 <script>
 	var countOfWeddings = 0; 
 	var articleCount = 0; 
-	var pageNumToHit = 7; 
+	var pageNumToHit = 3; 
 	var urlBuild1 = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 	var dataPull = '';
 	var snippets = []; 
@@ -385,6 +390,7 @@
 				// Word count from JSON
 					
 
+
 				// Prep for HTML
 					if (typeof containsDating != 'undefined'){containsDating = " | " + containsDating; } else { containsDating = ""; }
 					if (typeof containsIvy != 'undefined'){ containsIvy = " | " + containsIvy; } else { containsIvy = ""; }
@@ -399,7 +405,15 @@
 				}
 					
 					var ann_string = JSON.stringify(ann_obj); 
-					console.log(ann_obj); 
+					
+					// Compile word count arrays
+					// var bougeyAsArray = buildWordCountArrays(ann_obj, bougey); 
+// 					var datingAsArray = buildWordCountArrays(ann_obj, datingApps); 
+// 					var ivyAsArray = buildWordCountArrays(ann_obj, ivy_league); 
+// 					var meetingAsArray = buildWordCountArrays(ann_obj, other_meetings); 
+// 					var nycAsArray = buildWordCountArrays(ann_obj, nyc); 
+					
+					console.log(bougeyAsArray); 
 					
 					document.getElementById("meeting" + "-" + timingOrder).innerHTML = toDisplay; 
 					document.getElementById("dates" + "-" + timingOrder).innerHTML = "Dates: " + startingDate + " to " + endingDate; 
@@ -426,8 +440,55 @@
 			}
 		return tempcomp.trim(); 
 	}
+	
+	function wordCount(arr) {
+		var a = [], b = [], prev;
 
-	runDataPulls(pageNum, start_date1, end_date1, 1); 
+		arr.sort();
+		for ( var k = 0; k < arr.length; k++ ) {
+			if ( arr[k] !== prev ) {
+				a.push(arr[k]);
+				b.push(1);
+			} else {
+				b[b.length-1]++;
+			}
+			prev = arr[k];
+		}
+		return [a, b];
+	}
+	
+	function buildWordCountArrays(ann_obj, arr_in){
+		var arr_out = []; 
+		 
+		for (var key in ann_obj){
+			for (var ind=0; ind < ann_obj[key].arr_in.length(); ind++){
+				if ( ann_obj[key].arr_in[ind] != "") {
+					arr_out.push(ann_obj[key].arr_in);						
+				}
+			}
+		}
+		return arr_out; 
+	}
+			// 	
+			// // Function to generate table
+			// 	function generateTable([arr1, arr2]){
+			// 		var htmlTable = '<tr>'; 
+			// 		var tr = "<tr>";
+			// 		var tre = "</tr>";
+			// 		var th = "<th>";
+			// 		var the = "</th>";
+			// 
+			// 		for (var i = 0; i < arr1.length; i++){
+			// 			if (fillerwords.indexOf(arr1[i]) > -1) {}
+			// 			else {
+			// 				htmlTable = htmlTable + tr + th + arr1[i] + the + th + arr2[i] + the + tre;
+			// 			}
+			// 		}
+			// 		//console.log(htmlTable);
+			// 		return htmlTable; 
+			// 	}
+
+	// runDataPulls(pageNum, start_date1, end_date1, 1); 
 	
 	// setTimeout(function(){
 // 		runDataPulls(pageNum, start_date2, end_date2, 2); 
