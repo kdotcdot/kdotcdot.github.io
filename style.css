@@ -15,13 +15,21 @@ h3 {
 	text-transform: uppercase; 
 }
 p {
-    color: red;
+    color: black;
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-	font-size: 24px;
+	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.4px;
+}
+
+table {
+	border: 1px solid black; 
+    color: black;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	font-size: 14px;
+	padding-bottom: 20px; 	
 }
 
 

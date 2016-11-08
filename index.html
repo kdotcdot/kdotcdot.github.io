@@ -7,12 +7,19 @@
 </head>
 <body>
 
-<h1>The New York Times Wedding Announcements</h1>
-<h2>& the rise of online dating</h2>
+<h1>Javascript & The NYT Wedding Announcements</h1>
+<h2>The intersection of modern love (& how to get started coding)</h2>
+
 <h3>The context</h3>
 
 <p id ="dates-1">The dates are here: </p>
 <p id="meeting-1"></p>
+
+<table id="bougey"></table>
+<table id="datingApps"></table>
+<table id="ivy_league"></table>
+<table id="other_meetings"></table>
+<table id="nyc"></table>
 
 <!-- 
 <h1>2016 Months 3-4</h1>
@@ -40,7 +47,7 @@
 	var containsNYCFocus = ""; 
 	
 	var start_date1 = "20160101"; 
-	var end_date1 = "20160131"; 
+	var end_date1 = "20160115"; 
 // 	var start_date2 = "20160201"; 
 // 	var end_date2 = "20160228"; 
 // 	var start_date3 = "20160501"; 
@@ -65,35 +72,61 @@
 		}
 	}; 
 	
-	console.log(ann_obj[1].bougey); 
-	ann_obj[2] = {
-			url: "test_url", 
-			snippet: "test_snippet", 
-			other_meetings: "test_other_meetings", 
-			bougey: "test_bougey", 
-			datingApps: "test_datingApps", 
-			ivy_league: "test_ivy_league", 
-			nyc: "test_nyc"
-		}; 
-		
-	ann_obj[3] = {
-			url: "test_url", 
-			snippet: "test_snippet", 
-			other_meetings: "test_other_meetings", 
-			bougey: "test_bougey", 
-			datingApps: "test_datingApps", 
-			ivy_league: "test_ivy_league", 
-			nyc: "test_nyc"
-	}; 
+	// console.log(ann_obj[1].bougey); 
+// 	ann_obj[2] = {
+// 			url: "test_url", 
+// 			snippet: "test_snippet", 
+// 			other_meetings: "test_other_meetings", 
+// 			bougey: "test_bougey", 
+// 			datingApps: "test_datingApps", 
+// 			ivy_league: "test_ivy_league", 
+// 			nyc: "test_nyc"
+// 		}; 
+// 		
+// 	ann_obj[3] = {
+// 			url: "test_url", 
+// 			snippet: "test_snippet", 
+// 			other_meetings: "test_other_meetings", 
+// 			bougey: "test_bougey", 
+// 			datingApps: "test_datingApps", 
+// 			ivy_league: "test_ivy_league", 
+// 			nyc: "test_nyc"
+// 	}; 
 		
 	console.log(ann_obj); 
 	console.log(JSON.stringify(ann_obj));
 	
 	var other_meetings = ["mutual friends", "mutual friend", "next door", "apartment building", "co-op building", "at a bar", "blind date", "elementary school", "at the wedding", "met as children", "as children", "met while working", "at a restaurant", "fund-raiser", "dinner party", "met in high school", "when they both worked", "met as neighbors", "met while students", "were introduced by", "at a party", "while working at"]; 
-	var bougey = ["Northwestern", "Sotheby's", "Georgetown", "University of Cambridge", "Oxford", "Morgan Stanley", "Bank of America", "investment firm", "investment bank", "investment fund", "investment executive", "investment firms", "investment company", "investment banking", "PricewaterhouseCoopers", "Barclays", "venture capital", "Goldman Sachs", "University of Chicago", "Aspen Institute", "Burning Man", "law school", "business school", "banker", "lawyer", "lawyers", "venture capitalist", "law firm", "Ph D", "they both graduated", "from which they graduated", "they both graduated", "from which they graduated", "M B A", "M I T", "Duke", "in graduate school", "each earned a master’s degree", "from which each received"]; 
+	var bougey = ["University of Virginia", "hedge fund", "Northwestern", "Sotheby's", "Georgetown", "University of Cambridge", "Oxford", "Morgan Stanley", "Bank of America", "investment firm", "investment bank", "investment fund", "investment executive", "investment firms", "investment company", "investment banking", "PricewaterhouseCoopers", "Barclays", "venture capital", "Goldman Sachs", "University of Chicago", "Aspen Institute", "Burning Man", "law school", "business school", "banker", "lawyer", "lawyers", "venture capitalist", "law firm", "Ph D", "they both graduated", "from which they graduated", "they both graduated", "from which they graduated", "M B A", "M I T", "Duke", "in graduate school", "each earned a master’s degree", "from which each received", "Kennebunkport", "Hyannis", "Hyannisport"]; 
 	var datingApps = ["Match", "Craigslist", "Tinder", "Hinge", "OkCupid", "online", "profile", "Bumble", "Coffee Meets Bagel", "JDate", "Match.com", "OurTime.com", "How About We", "dating website", "dating app", "eHarmony"]; 
 	var ivy_league = ["Harvard", "Yale", "Brown", "Cornell", "Columbia", "Dartmouth", "Princeton", "University of Pennsylvania", "Penn"]; 
-	var nyc = ["New York City", "Brooklyn", "Central Park", "New York", "Wall Street", "Nantucket", "Choate Rosemary Hall", "East Village", "Prospect Park", "Greenwich Village", "East Hampton", "Manhattan"];
+	var nyc = ["New York City", "Brooklyn", "Central Park", "New York", "Wall Street", "Nantucket", "Choate Rosemary Hall", "East Village", "Prospect Park", "Greenwich Village", "East Hampton", "Manhattan", "Fifth Avenue", "Park Avenue", "Madison Avenue"];
+	var doctors = ["cardiologist", "gynecologist", "pathologist", "radiologist", "gastroenterologist", "anesthesiologist", "opthalmologist"]; 
+	var consultants = ["McKinsey", "Bain & Company", "Boston Consulting Group"]; 
+	var levels = ["cum laude", "magna cum laude", "summa cum laude", "Marshall scholar", "Rhodes scholar", "Fulbright"]; 
+	
+	var bakerScoring = {
+		names: {
+			names: ["de la", "van der", "von", "Von Trapp", "majesty", "III", "IV", "Chip", "Skip", "Trip", "Trey"], 
+			names_pt: [1, 2, 2, 3, 10, 3, 4, 3, 3, 3, 3]
+		}, 
+		colleges: {
+			insufferables: ["Cal Tech", "California Institute of Technology", "Cambridge", "Columbia", "Harvard", "M I T", "Oxford", "Princeton", "Stanford", "Yale"], 
+			insufferables_pt: 3, 
+			demiElite: ["Amherst", "Berkeley", "Brown", "Cornell", "Dartmouth", "Duke", "Georgetown", "Penn", "UNC", "UVA", "Williams"], 
+			demiElite_pt: 2, 
+			boardingSchool: ["Bowdoin", "Charleston", "Colgate", "Colorado College", "Davidson", "Hamilton", "Hobart", "Middlebury", "Pepperdine", "Rollins", "SMU", "Ole Miss", "Trinity", "Vanderbilt", "Washington & Lee"], 
+			boardingSchool_pt: 1, 
+			powerHippies: ["Bard", "Berkeley", "Hampshire", "Oberlin", "Pomona", "RISD", "Rhode Island School of Design", "Swarthmore", "Vassar", "Wesleyan"], 
+			powerHippies_pt: 1, 
+			otherNotables: ["West Point", "Howard", "Julliard", "Morehouse", "Naval Academy", "Smith", "Spelman", "St Andrews", "University of California at Los Angeles", "UCLA", "USC", "Wellesley"], 
+			otherNotables_pt: 1
+		}, 
+		graduateSchools: {
+			gradschool: ["in graduate school", "each earned a master’s degree", "from which each received", "multiple degrees"], 
+			gradschool_pt:3
+		}
+	}
 	
 	function generateURL(date1, date2){
 		urlBuild1 += '?' + $.param({
@@ -126,233 +159,233 @@
 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 3), pageNumber);
 		}, timeOutValue * (2 ^ (pageNumber + 3))); 
 
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 4), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 4))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 5), pageNumber);	
-		}, timeOutValue * (2 ^ (pageNumber + 5))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 6), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 6))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 7), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 7))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 8), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 8)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 9), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 9)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 10), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 10)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 11), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 11)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 12), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 12))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 13), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 13))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 14), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 14)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 15), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 15)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 16), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 16)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 17), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 17)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 18), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 18)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 19), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 19)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 20), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 20)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 21), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 21)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 22), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 22))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 23), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 23))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 24), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 24)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 25), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 25)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 26), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 26)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 27), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 27)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 28), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 28)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 29), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 29)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 30), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 30)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 31), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 31)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 32), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 32))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 33), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 33))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 34), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 34)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 35), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 35)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 36), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 36)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 37), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 37)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 38), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 38)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 39), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 39)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 40), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 40)));  			
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 41), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 41)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 42), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 42))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 43), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 43))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 44), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 44)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 45), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 45)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 46), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 46)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 47), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 47)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 48), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 48)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 49), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 49)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 50), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 50)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 51), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 51)));  		
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 52), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 52))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 53), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 53))); 
-		
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 54), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 54)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 55), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 55)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 56), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 56)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 57), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 57)));  
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 58), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 58)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 59), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 59)));  		
-
-		setTimeout(function(){
-			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 60), pageNumber);
-		}, timeOutValue * (2 ^ (pageNumber + 60)));  			
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 4), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 4))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 5), pageNumber);	
+// 		}, timeOutValue * (2 ^ (pageNumber + 5))); 
+// 		
+		// setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 6), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 6))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 7), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 7))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 8), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 8)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 9), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 9)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 10), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 10)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 11), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 11)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 12), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 12))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 13), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 13))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 14), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 14)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 15), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 15)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 16), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 16)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 17), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 17)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 18), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 18)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 19), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 19)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 20), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 20)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 21), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 21)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 22), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 22))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 23), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 23))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 24), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 24)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 25), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 25)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 26), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 26)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 27), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 27)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 28), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 28)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 29), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 29)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 30), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 30)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 31), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 31)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 32), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 32))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 33), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 33))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 34), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 34)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 35), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 35)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 36), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 36)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 37), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 37)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 38), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 38)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 39), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 39)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 40), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 40)));  			
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 41), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 41)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 42), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 42))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 43), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 43))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 44), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 44)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 45), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 45)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 46), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 46)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 47), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 47)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 48), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 48)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 49), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 49)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 50), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 50)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 51), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 51)));  		
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 52), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 52))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 53), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 53))); 
+// 		
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 54), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 54)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 55), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 55)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 56), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 56)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 57), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 57)));  
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 58), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 58)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 59), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 59)));  		
+// 
+// 		setTimeout(function(){
+// 			returndataPull(date1, date2, timing, urlBuild1 + "&page=" + (pageNumber + 60), pageNumber);
+// 		}, timeOutValue * (2 ^ (pageNumber + 60)));  			
 	}
 			
 	function returndataPull(startingDate, endingDate, timingOrder, url, pageNum) {			
@@ -386,17 +419,14 @@
 						ivy_league: containsIvy.split(" "), 
 						nyc: containsNYCFocus.split(" ")
 					}; 
-					
-				// Word count from JSON
-					
 
 
 				// Prep for HTML
-					if (typeof containsDating != 'undefined'){containsDating = " | " + containsDating; } else { containsDating = ""; }
-					if (typeof containsIvy != 'undefined'){ containsIvy = " | " + containsIvy; } else { containsIvy = ""; }
-					if (typeof containsBougeyShit != 'undefined'){containsBougeyShit = " | " + containsBougeyShit; } else {containsBougeyShit = "";}
-					if (typeof containsOtherMeetingTypes != 'undefined'){containsOtherMeetingTypes = " | " + containsOtherMeetingTypes; } else { containsOtherMeetingTypes = ""; }
-					if (typeof containsNYCFocus != 'undefined'){containsNYCFocus = " | " + containsNYCFocus; } else { containsNYCFocus = ""; }
+					if (typeof containsDating != 'undefined'){containsDating = " | " + containsDating; } else { containsDating = null; }
+					if (typeof containsIvy != 'undefined'){ containsIvy = " | " + containsIvy; } else { containsIvy = null; }
+					if (typeof containsBougeyShit != 'undefined'){containsBougeyShit = " | " + containsBougeyShit; } else {containsBougeyShit = null;}
+					if (typeof containsOtherMeetingTypes != 'undefined'){containsOtherMeetingTypes = " | " + containsOtherMeetingTypes; } else { containsOtherMeetingTypes = null; }
+					if (typeof containsNYCFocus != 'undefined'){containsNYCFocus = " | " + containsNYCFocus; } else { containsNYCFocus = null; }
 
 				// Display
 					toDisplay = toDisplay + " <br /> " + (countOfWeddings + 1) + " | " + result.response.docs[articleCount].snippet + " | " + result.response.docs[articleCount].pub_date.substring(0, 7) + containsDating + containsIvy + containsBougeyShit + containsOtherMeetingTypes + containsNYCFocus;
@@ -404,19 +434,33 @@
 					countOfWeddings ++; 
 				}
 					
-					var ann_string = JSON.stringify(ann_obj); 
-					
+					//  var ann_string = JSON.stringify(ann_obj); 
+// 					 console.log(ann_string); 
+					 									
 					// Compile word count arrays
-					// var bougeyAsArray = buildWordCountArrays(ann_obj, bougey); 
-// 					var datingAsArray = buildWordCountArrays(ann_obj, datingApps); 
-// 					var ivyAsArray = buildWordCountArrays(ann_obj, ivy_league); 
-// 					var meetingAsArray = buildWordCountArrays(ann_obj, other_meetings); 
-// 					var nycAsArray = buildWordCountArrays(ann_obj, nyc); 
-					
-					console.log(bougeyAsArray); 
+					var bougeyAsArray = buildWordCountArrays(ann_obj, "bougey"); 
+					var datingAsArray = buildWordCountArrays(ann_obj, "datingApps"); 
+					var ivyAsArray = buildWordCountArrays(ann_obj, "ivy_league"); 
+					var meetingAsArray = buildWordCountArrays(ann_obj, "other_meetings"); 
+					var nycAsArray = buildWordCountArrays(ann_obj, "nyc"); 
+
+
+					// Count words
+					var bougeyCount = wordCount(bougeyAsArray); 
+					var datingCount = wordCount(datingAsArray); 
+					var ivyCount =  wordCount(ivyAsArray); 
+					var meetingCount = wordCount(meetingAsArray); 
+					var nycCount = wordCount(nycAsArray); 
 					
 					document.getElementById("meeting" + "-" + timingOrder).innerHTML = toDisplay; 
 					document.getElementById("dates" + "-" + timingOrder).innerHTML = "Dates: " + startingDate + " to " + endingDate; 
+ 
+ 					document.getElementById("bougey").innerHTML = generateTable(bougeyCount); 
+ 					document.getElementById("datingApps").innerHTML = generateTable(datingCount); 
+ 					document.getElementById("ivy_league").innerHTML = generateTable(ivyCount); 
+ 					document.getElementById("other_meetings").innerHTML = generateTable(meetingCount); 
+ 					document.getElementById("nyc").innerHTML = generateTable(nycCount); 
+
 
 			}).fail(function(err) {
 			  throw err;
@@ -426,6 +470,8 @@
 	
 	function findWords(where_to_look, what_to_find){
 		var tempcomp = ""; 
+		var tempcompRet; 
+		
 		for(var i = 0; i <= what_to_find.length; i++) {
 				if ((where_to_look.indexOf(what_to_find[i]) > -1)){
 					tempcomp = tempcomp + " " + what_to_find[i];
@@ -436,7 +482,6 @@
 				else if(where_to_look.indexOf(what_to_find[i] + " " + what_to_find[i+1] + " " + what_to_find[i+2]) > -1){
 					tempcomp = tempcomp + " " + what_to_find[i] + "-" + what_to_find[i+1] + "-" + what_to_find[i+2];
 				}
-				else{}
 			}
 		return tempcomp.trim(); 
 	}
@@ -459,45 +504,45 @@
 	
 	function buildWordCountArrays(ann_obj, arr_in){
 		var arr_out = []; 
-		 
-		for (var key in ann_obj){
-			for (var ind=0; ind < ann_obj[key].arr_in.length(); ind++){
-				if ( ann_obj[key].arr_in[ind] != "") {
-					arr_out.push(ann_obj[key].arr_in);						
+		
+	  	for (var key in ann_obj) {
+		  // console.log ("Key =" + key); 
+		  if (ann_obj.hasOwnProperty(key)) {
+		  	for (var type in ann_obj[key]) {
+		  		// console.log ("Type is " + type + " with " + arr_in); 
+				if (type == arr_in) {
+					// console.log ("Type = Arr_in = " + type + " " + arr_in); 
+					if (ann_obj[key][type] != undefined &&  ann_obj[key][type] != "")
+					{ 
+						// console.log (arr_in + " - " + key + " - " + type + " - " + ann_obj[key][type]); 
+						for (var i = 0; i < ann_obj[key][type].length; i++) {
+							arr_out.push(ann_obj[key][type][i]); 
+						}
+					} 
 				}
-			}
+		  	}
+		  }
 		}
 		return arr_out; 
 	}
-			// 	
-			// // Function to generate table
-			// 	function generateTable([arr1, arr2]){
-			// 		var htmlTable = '<tr>'; 
-			// 		var tr = "<tr>";
-			// 		var tre = "</tr>";
-			// 		var th = "<th>";
-			// 		var the = "</th>";
-			// 
-			// 		for (var i = 0; i < arr1.length; i++){
-			// 			if (fillerwords.indexOf(arr1[i]) > -1) {}
-			// 			else {
-			// 				htmlTable = htmlTable + tr + th + arr1[i] + the + th + arr2[i] + the + tre;
-			// 			}
-			// 		}
-			// 		//console.log(htmlTable);
-			// 		return htmlTable; 
-			// 	}
-
-	// runDataPulls(pageNum, start_date1, end_date1, 1); 
 	
-	// setTimeout(function(){
-// 		runDataPulls(pageNum, start_date2, end_date2, 2); 
-// 	}, timeOutValue * 20); 
+	// Function to generate table
+		function generateTable(arr){
+			var htmlTable = '<tr>'; 
+			var tr = "<tr>";
+			var tre = "</tr>";
+			var th = "<th>";
+			var the = "</th>";
+	
+			for (var i = 0; i < arr[0].length; i++){
+				htmlTable = htmlTable + tr + th + arr[0][i] + the + th + arr[1][i] + the + tre;
+			}
+			console.log(htmlTable);
+			return htmlTable; 
+		}
 
-// 	runDataPulls(pageNum, start_date3, end_date3, 3); 
-// 	runDataPulls(pageNum, start_date4, end_date4, 4); 
-// 	runDataPulls(pageNum, start_date5, end_date5, 5); 
-// 	runDataPulls(pageNum, start_date6, end_date6, 6); 
+	 runDataPulls(pageNum, start_date1, end_date1, 1); 
+
 	
 </script>
 
